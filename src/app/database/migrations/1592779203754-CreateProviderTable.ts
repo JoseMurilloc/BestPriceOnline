@@ -13,27 +13,27 @@ export class CreateProviderTable1592779203754 implements MigrationInterface {
             generationStrategy: 'increment'
           },
           {
-            name: 'name',
-            type: 'varchar',
-            isNullable: false
-          },
-          {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true
-          },
-          {
-            name: 'password',
-            type: 'varchar'
-          },
-          {
             name: 'amount_offer',
             type: 'integer',
             default: 0
           },
           {
+            name: 'name_company',
+            type: 'varchar'
+          },
+          {
             name: 'user_id',
             type: 'integer'
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp with time zone',
+            default: 'now()'
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp with time zone',
+            default: 'now()'
           }
         ]
       })

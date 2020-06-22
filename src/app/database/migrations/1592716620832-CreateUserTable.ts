@@ -9,7 +9,7 @@ export class CreateUserTable1592716620832 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'integer',
+            type: 'serial',
             isPrimary: true,
             generationStrategy: 'increment'
           },
@@ -26,6 +26,21 @@ export class CreateUserTable1592716620832 implements MigrationInterface {
           {
             name: 'password',
             type: 'varchar'
+          },
+          {
+            name: 'provider',
+            type: 'boolean',
+            default: false
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp with time zone',
+            default: 'now()'
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp with time zone',
+            default: 'now()'
           }
         ]
       })

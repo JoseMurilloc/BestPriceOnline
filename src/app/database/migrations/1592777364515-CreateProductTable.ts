@@ -31,6 +31,25 @@ export class CreateProductTable1592777364515 implements MigrationInterface {
           {
             name: 'user_id',
             type: 'integer'
+          },
+          {
+            name: 'brand',
+            type: 'varchar'
+          },
+          {
+            name: 'unity',
+            type: 'varchar',
+            isNullable: false
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp with time zone',
+            default: 'now()'
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp with time zone',
+            default: 'now()'
           }
         ]
       })
