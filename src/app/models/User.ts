@@ -5,18 +5,18 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ nullable: false })
+    @Column()
     name: string;
 
-    @Column({ unique: true })
+    @Column()
     email: string;
 
     @Column()
     password: string;
 
     @CreateDateColumn()
-    createdAt: Date;
+    created_at: Date;
 
     @UpdateDateColumn()
-    updateAt: Date;
+    updated_at: Date;
 }
