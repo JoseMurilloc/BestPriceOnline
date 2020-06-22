@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity('products')
 export class Product {
@@ -21,8 +21,14 @@ export class Product {
     unity: string;
 
     @Column()
-    category_id: number;
+    categoryId: number;
 
     @Column()
-    user_id: number;
+    userId: number;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updateAt: Date;
 }
