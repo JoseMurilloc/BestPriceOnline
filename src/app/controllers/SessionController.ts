@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
 import UserRepository from '../repositories/UserRepository'
 import { sign } from 'jsonwebtoken'
+import { compare } from 'bcryptjs'
 
 class SessionController {
   async store (req: Request, res: Response) {
@@ -18,7 +19,7 @@ class SessionController {
         return res.status(400).json({ error: 'E-mail ou senha inválido' })
       }
 
-      const passwordMath = password === user.password
+      const passwordMath = compare(password, user.password)
 
       if (!passwordMath) {
         return res.status(400).json({ error: 'E-mail ou senha inválido' })
