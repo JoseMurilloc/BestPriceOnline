@@ -32,7 +32,7 @@ export class CreateCategoryTable1592784786441 implements MigrationInterface {
         columnNames: ['category_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'categories',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       }
     ))
   }

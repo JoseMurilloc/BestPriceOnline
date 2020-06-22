@@ -44,7 +44,7 @@ export class CreateProviderTable1592779203754 implements MigrationInterface {
         columnNames: ['user_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       }
     ))
   }

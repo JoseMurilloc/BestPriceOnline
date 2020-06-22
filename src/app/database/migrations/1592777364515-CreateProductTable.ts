@@ -41,7 +41,7 @@ export class CreateProductTable1592777364515 implements MigrationInterface {
         columnNames: ['user_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       }
     ))
   }
