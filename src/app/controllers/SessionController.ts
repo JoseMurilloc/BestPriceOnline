@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
 import UserRepository from '../repositories/UserRepository'
+import authConfig from '../config/auth'
+
 import { sign } from 'jsonwebtoken'
 import { compare } from 'bcryptjs'
 
@@ -25,9 +27,9 @@ class SessionController {
         return res.status(400).json({ error: 'E-mail ou senha inválido' })
       }
 
-      const token = sign({ provider: user.provider }, 'bb4f6b6babc0c14f67e99f4601aaaaca', {
+      const token = sign({ provider: user.provider }, authConfig.secret, {
         subject: String(user.id),
-        expiresIn: '1d'
+        expiresIn: authConfig.expiresIn
       })
 
       delete user.password
