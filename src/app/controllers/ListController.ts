@@ -8,6 +8,18 @@ interface RequestList {
 }
 
 class ListController {
+
+  async index (req: Request, res: Response) {
+    const listRepository = getCustomRepository(ListRepository)
+    const user_id = req.user.id
+
+    const lists = await listRepository.find(
+      { where: { user_id }, select: ['description', 'id'] }
+    )
+
+    return res.json(lists)
+  }
+
   async store (req: Request, res: Response) {
 
    try {
@@ -24,7 +36,6 @@ class ListController {
 
     return res.status(201).json({
       description,
-      id
     })
    } catch {
      return res.status(500).json({ error: 'Erro interno no servidores' })
