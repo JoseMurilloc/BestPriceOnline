@@ -6,6 +6,7 @@ import SessionController from './controllers/SessionController'
 import AuthMiddleware from './middlewares/auth'
 import ProductController from './controllers/ProductController'
 import CategoryController from './controllers/CategoryController'
+import ListController from './controllers/ListController'
 
 const routes = Router()
 
@@ -21,5 +22,8 @@ routes.post('/products', AuthMiddleware, ProductController.store)
 
 // Categories
 routes.get('/categories', AuthMiddleware, CategoryController.index)
+
+// List
+routes.post('/lists', AuthMiddleware, ListController.store)
 
 export default routes
