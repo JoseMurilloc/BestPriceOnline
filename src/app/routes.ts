@@ -1,17 +1,21 @@
 import { Router } from 'express'
 
-import UserController from './controllers/UserController'
-import SessionController from './controllers/SessionController'
-
 import AuthMiddleware from './middlewares/auth'
+import multer from 'multer'
+import uploadConfig from './config/upload'
+
+import SessionController from './controllers/SessionController'
+import UserController from './controllers/UserController'
 import ProductController from './controllers/ProductController'
 import CategoryController from './controllers/CategoryController'
 import ListController from './controllers/ListController'
 
 const routes = Router()
+const upload = multer(uploadConfig)
 
 // Users
 routes.post('/users', UserController.store)
+routes.patch('/avatars', AuthMiddleware, upload.single('avatar'), UserController.create)
 
 // Sessions
 routes.post('/sessions', SessionController.store)
