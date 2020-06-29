@@ -15,5 +15,11 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "no-unused-vars": [
+            "error",
+            {
+                "varsIgnorePattern": ["Response", "Request"]
+            }
+          ]
     }
 }
