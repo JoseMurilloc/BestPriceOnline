@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
 import ListRepository from '../repositories/ListRepository'
+import ListProductRepository from '../repositories/ListProductRepository'
 
 interface RequestList {
   description: string;
@@ -18,6 +19,33 @@ class ListController {
     )
 
     return res.json(lists)
+  }
+
+  async show (req: Request, res: Response) {
+    const id = Number(req.params.id)
+
+    const listRepository = getCustomRepository(ListRepository)
+    const listProductRepository = getCustomRepository(ListProductRepository)
+
+    const user_id = req.user.id
+
+    const list = await listRepository.findOne(
+      { where: { user_id, id }, select: ['description', 'id'] }
+    )
+
+    const productsLists = await listProductRepository.find(
+      { 
+        where: { list_id: list.id },
+        select: ['amount'],
+        relations: ['product']
+      }
+    )
+
+
+    return res.json({
+      list,
+      productsLists
+    })
   }
 
   async store (req: Request, res: Response) {

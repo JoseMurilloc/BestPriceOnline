@@ -24,6 +24,8 @@ routes.post('/products', AuthMiddleware, ProductController.store)
 routes.get('/categories', AuthMiddleware, CategoryController.index)
 
 // List
+routes.get('/lists', AuthMiddleware, ListController.index)
+routes.get('/lists/:id', AuthMiddleware, ListController.show)
 routes.post('/lists', AuthMiddleware, ListController.store)
 
 export default routes
