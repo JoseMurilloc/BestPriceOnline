@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { MigrationInterface, QueryRunner, Table } from 'typeorm'
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm'
 
 export class CreateUserTable1592716620832 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
@@ -26,11 +26,6 @@ export class CreateUserTable1592716620832 implements MigrationInterface {
           {
             name: 'password',
             type: 'varchar'
-          },
-          {
-            name: 'provider',
-            type: 'boolean',
-            default: false
           },
           {
             name: 'created_at',

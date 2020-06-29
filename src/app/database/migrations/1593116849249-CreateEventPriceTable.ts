@@ -1,10 +1,15 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm'
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey
+} from 'typeorm'
 
-export class CreateProviderTable1592779203754 implements MigrationInterface {
+export class CreateEventPriceTable1593116849249 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'providers',
+        name: 'eventPrices',
         columns: [
           {
             name: 'id',
@@ -13,16 +18,15 @@ export class CreateProviderTable1592779203754 implements MigrationInterface {
             generationStrategy: 'increment'
           },
           {
-            name: 'name',
+            name: 'date_end',
+            type: 'timestamp with time zone'
+          },
+          {
+            name: 'title',
             type: 'varchar'
           },
           {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true
-          },
-          {
-            name: 'password',
+            name: 'observation',
             type: 'varchar'
           },
           {
@@ -30,15 +34,9 @@ export class CreateProviderTable1592779203754 implements MigrationInterface {
             type: 'integer'
           },
           {
-            name: 'amount_offer',
-            type: 'integer',
-            default: 0
+            name: 'list_id',
+            type: 'integer'
           },
-          {
-            name: 'company',
-            type: 'varchar'
-          },
-
           {
             name: 'created_at',
             type: 'timestamp with time zone',
@@ -53,19 +51,30 @@ export class CreateProviderTable1592779203754 implements MigrationInterface {
       })
     )
 
-    await queryRunner.createForeignKey('providers', new TableForeignKey(
+    await queryRunner.createForeignKey('eventPrices', new TableForeignKey(
       {
-        name: 'FK_provider_user',
+        name: 'FK_eventPrice_user',
         columnNames: ['user_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
         onDelete: 'SET NULL'
       }
     ))
+
+    await queryRunner.createForeignKey('eventPrices', new TableForeignKey(
+      {
+        name: 'FK_eventPrices_list',
+        columnNames: ['list_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'lists',
+        onDelete: 'SET NULL'
+      }
+    ))
   }
 
   public async down (queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('users', 'FK_provider_user')
-    await queryRunner.dropTable('providers')
+    await queryRunner.dropForeignKey('lists', 'FK_eventPrices_list')
+    await queryRunner.dropForeignKey('users', 'FK_eventPrices_user')
+    await queryRunner.dropTable('categories')
   }
 }
