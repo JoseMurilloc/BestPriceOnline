@@ -10,9 +10,6 @@ export class Product {
     description: string;
 
     @Column()
-    amount: number;
-
-    @Column()
     barcode: string;
 
     @Column()
@@ -22,10 +19,10 @@ export class Product {
     unity: string;
 
     @Column()
-    categoryId: number;
+    category_id: number;
 
     @Column()
-    userId: number;
+    user_id: number;
 
     // Class to Model
     @ManyToOne(() => User)
@@ -33,8 +30,8 @@ export class Product {
     user: User;
 
     @CreateDateColumn()
-    createdAt: Date;
+    created_at: Date;
 
     @UpdateDateColumn()
-    updateAt: Date;
+    updated_at: Date;
 }

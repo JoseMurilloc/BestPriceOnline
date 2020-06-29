@@ -10,32 +10,23 @@ import {
 
 @Entity('providers')
 export class Provider {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ nullable: false })
-    name: string;
+  @Column()
+  amountOffer: number;
 
-    @Column({ unique: true })
-    email: string;
+  @Column()
+  userId: number;
 
-    @Column()
-    password: string;
+  // Class to Model
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
-    @Column()
-    amountOffer: number;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @Column()
-    userId: number;
-
-    // Class to Model
-    @ManyToOne(() => User)
-    @JoinColumn({ name: 'user_id' })
-    user: User;
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updateAt: Date;
+  @UpdateDateColumn()
+  updateAt: Date;
 }

@@ -9,8 +9,8 @@ export class Category {
     description: string;
 
     @CreateDateColumn()
-    createdAt: Date;
+    created_at: Date;
 
     @UpdateDateColumn()
-    updateAt: Date;
+    updated_at: Date;
 }
