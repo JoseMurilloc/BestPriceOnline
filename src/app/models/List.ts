@@ -12,11 +12,12 @@ export class List {
 
   @Column()
   user_id: number;
-  
+
   // Class to Model
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
+  
 
   @CreateDateColumn()
   created_at: Date;
