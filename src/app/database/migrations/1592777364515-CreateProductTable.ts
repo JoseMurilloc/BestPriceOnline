@@ -108,6 +108,6 @@ export class CreateProductTable1592777364515 implements MigrationInterface {
     await queryRunner.dropForeignKey('users', 'FK_product_category')
     await queryRunner.dropForeignKey('users', 'FK_product_user')
     await queryRunner.dropTable('products')
-    await queryRunner.dropTable('category')
+    await queryRunner.dropTable('categories')
   }
 }
