@@ -18,14 +18,22 @@ class ProductController {
 
   
   async index(req: Request, res: Response) {
-    const productRepository = getCustomRepository(ProductRepository)
-    
-    const products = await productRepository.find({
-      select: ['description', 'barcode', 'brand', 'unity'],
-      where: { user_id: req.user.id }     
-    })
+    try {
+      const productRepository = getCustomRepository(ProductRepository)
+      
+      const products = await productRepository.find({
+        select: ['description', 'barcode', 'brand', 'unity'],
+        where: { user_id: req.user.id }     
+      })      
 
-    return res.json(products)
+      return res.json(products)
+    } catch(err) {
+      return res.status(500).json(
+        {
+          message_error: err.message
+        }
+      )
+    }
   }
 
   async store (req: Request, res: Response) {
