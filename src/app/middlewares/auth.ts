@@ -24,12 +24,19 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     // decoded basicamente é os dados do payload do Token
     const { provider, sub } = decoded as TokenPayload
 
+    if (provider) {
+      return res.status(400).json({
+        error: 'User is not access to resources'
+      })
+    }
+
     req.user = {
       id: sub,
       provider
     }
 
     return next()
+
   } catch (err) {
     return res.status(401).json({ error: 'Token Invalid' })
   }
