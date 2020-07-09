@@ -1,9 +1,8 @@
+import { Category } from './../models/Category';
 import { Request, Response } from 'express'
-import { getCustomRepository } from 'typeorm'
+import { getCustomRepository, getRepository } from 'typeorm'
 
 import ProductRepository from '../repositories/ProductRepository'
-import CategoryRepository from '../repositories/CategoryRepository'
-
 
 interface RequestProduct {
   description: string;
@@ -16,15 +15,15 @@ interface RequestProduct {
 
 class ProductController {
 
-  
+
   async index(req: Request, res: Response) {
     try {
       const productRepository = getCustomRepository(ProductRepository)
-      
+
       const products = await productRepository.find({
         select: ['description', 'barcode', 'brand', 'unity'],
-        where: { user_id: req.user.id }     
-      })      
+        where: { user_id: req.user.id }
+      })
 
       return res.json(products)
     } catch(err) {
@@ -38,7 +37,7 @@ class ProductController {
 
   async store (req: Request, res: Response) {
     const productRepository = getCustomRepository(ProductRepository)
-    const categoryRepository = getCustomRepository(CategoryRepository)
+    const categoryRepository = getRepository(Category)
 
     let data : RequestProduct;
 

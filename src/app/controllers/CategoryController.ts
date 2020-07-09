@@ -1,11 +1,10 @@
+import { Category } from './../models/Category';
 import { Request, Response } from 'express'
-import { getCustomRepository } from 'typeorm'
-import CategoryRepository from '../repositories/CategoryRepository'
-
+import { getRepository } from 'typeorm'
 
 class CategoryController {
   async index (req: Request, res: Response) {
-    const categoryRepository = getCustomRepository(CategoryRepository)
+    const categoryRepository = getRepository(Category)
 
     const categories = await categoryRepository.find(
       { select: ['description'] }
