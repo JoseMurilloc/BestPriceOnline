@@ -16,8 +16,11 @@ export class Provider {
   @Column()
   company: string;
 
-  @Column({ name: 'amount_offer' })
-  amountOffer: number;
+  @Column()
+  address: string;
+
+  @Column({ name: 'url_image'})
+  urlImage: string;
 
   @CreateDateColumn({ name: 'created_at'})
   createdAt: Date;

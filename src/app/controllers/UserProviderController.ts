@@ -1,13 +1,13 @@
 import { hash } from 'bcryptjs';
 import { Provider } from './../models/Provider';
 import { User } from './../models/User';
-import { Request, Response } from "express";
-import { getRepository } from "typeorm";
+import { Request, Response } from 'express';
+import { getRepository } from 'typeorm';
 
 class UserProviderController {
 
   async index(req: Request, res: Response) {
-    const providerRepository = getRepository(Provider)
+
     const userRepository = getRepository(User)
     const { id } = req.user
 
