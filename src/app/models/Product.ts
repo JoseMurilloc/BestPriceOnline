@@ -21,8 +21,8 @@ export class Product {
     @Column()
     category_id: number;
 
-    @Column()
-    user_id: number;
+    @Column({ name: 'user_id'})
+    userId: number;
 
     // Class to Model
     @ManyToOne(() => User)

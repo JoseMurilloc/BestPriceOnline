@@ -2,9 +2,9 @@ import { Router } from 'express';
 import UserProviderController from '../controllers/UserProviderController';
 import AuthMiddleware from '../middlewares/auth'
 
-const productRoutes = Router()
+const userProviderRoutes = Router()
 
-productRoutes.get('/user/providers', AuthMiddleware, UserProviderController.index)
-productRoutes.post('/user/providers', AuthMiddleware, UserProviderController.store)
+userProviderRoutes.get('/user/providers', AuthMiddleware, UserProviderController.index)
+userProviderRoutes.post('/user/providers', AuthMiddleware, UserProviderController.store)
 
-export default productRoutes;
+export default userProviderRoutes;
