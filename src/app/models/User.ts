@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import { Provider } from './Provider';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
 
 @Entity('users')
 export class User {
@@ -19,6 +20,16 @@ export class User {
 
     @Column()
     provider: boolean;
+
+    @Column()
+    user_id: number;
+
+    @Column()
+    provider_id: number;
+
+    @ManyToOne(() => Provider)
+    @JoinColumn({ name: 'provider_id'})
+    user: User;
 
     @CreateDateColumn()
     created_at: Date;

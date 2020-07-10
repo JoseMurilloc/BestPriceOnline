@@ -14,19 +14,14 @@ export class Provider {
   id: number;
 
   @Column()
+  company: string;
+
+  @Column({ name: 'amount_offer' })
   amountOffer: number;
 
-  @Column()
-  userId: number;
-
-  // Class to Model
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
-  user: User;
-
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at'})
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at'})
   updateAt: Date;
 }
