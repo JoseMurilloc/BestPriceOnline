@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { Request, Response, NextFunction } from 'express'
 import routes from './app/routes'
 import uploadConfig from './app/config/upload'
 
@@ -10,11 +10,9 @@ app.use(express.json())
 app.use('/files', express.static(uploadConfig.directory))
 app.use(routes)
 
-app.use((request: Request, response: Response) => {
-  const error = new Error('Route not found')
-
-  return response.status(404).json({
-    message: error.message
+app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
+  return response.status(500).json({
+    message: err.message
   })
 })
 
