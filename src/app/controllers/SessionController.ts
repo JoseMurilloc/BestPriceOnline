@@ -21,7 +21,7 @@ class SessionController {
         return res.status(400).json({ error: 'E-mail ou senha inválido' })
       }
 
-      const passwordMath = compare(password, user.password)
+      const passwordMath = await compare(password, user.password)
 
       if (!passwordMath) {
         return res.status(400).json({ error: 'E-mail ou senha inválido' })
