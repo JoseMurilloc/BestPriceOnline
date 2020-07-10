@@ -36,7 +36,7 @@ class UserController {
 
   async create (req: Request, res: Response) {
     try {
-     
+
       const userRepository = getCustomRepository(UserRepository)
 
       const user = await userRepository.findOne(req.user.id)
@@ -57,12 +57,52 @@ class UserController {
       user.avatar = req.file.filename
 
       await userRepository.save(user)
-  
+
 
       return res.json(user)
     } catch(err) {
       return res.status(500).json({ error: err.message })
     }
+  }
+
+  async update (req: Request, res: Response) {
+    const { email, OldPassword, password } = req.body;
+
+    const userRepository = getCustomRepository(UserRepository)
+
+    const user = await userRepository.findOne(req.user.id);
+
+    if (email && email !== user.email) {
+      const userExists = await userRepository.findOne({
+        where: {
+          email,
+        },
+      });
+
+      if (userExists) {
+        return res.status(400).json({ error: 'Usuário já existe' });
+      } else {
+        user.email = email
+      }
+    }
+
+    // const checkPassword = async() => await bcrypt.compare(user.password, oldPassword)
+
+    if (OldPassword) {
+      const checkPassword = await bcrypt.compare(OldPassword, user.password)
+
+      if (!checkPassword) {
+        return res.status(401).json({ error: 'Senha antiga não corresponde' });
+      } else {
+        user.password = await bcrypt.hash(password, 8)
+      }
+    }
+
+    await userRepository.save(user);
+
+    return res.json({
+      user
+    });
   }
 }
 

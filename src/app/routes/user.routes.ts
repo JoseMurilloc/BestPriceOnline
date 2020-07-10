@@ -10,10 +10,12 @@ const upload = multer(uploadConfig)
 
 userRoutes.post('/users', UserController.store)
 userRoutes.patch(
-  '/avatars', 
-  AuthMiddleware, 
+  '/avatars',
+  AuthMiddleware,
   upload.single('avatar'),
   UserController.create
 )
+
+userRoutes.put('/users', AuthMiddleware, UserController.update)
 
 export default userRoutes
