@@ -4,7 +4,7 @@ import { User } from './../models/User';
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 
-class ProviderController {
+class UserProviderController {
 
   async index(req: Request, res: Response) {
     const providerRepository = getRepository(Provider)
@@ -78,4 +78,4 @@ class ProviderController {
 
 }
 
-export default new ProviderController();
+export default new UserProviderController();

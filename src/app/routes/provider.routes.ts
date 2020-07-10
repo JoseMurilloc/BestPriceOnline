@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import ProviderController from '../controllers/ProviderController';
+import UserProviderController from '../controllers/UserProviderController';
 import AuthMiddleware from '../middlewares/auth'
 
 const productRoutes = Router()
 
-productRoutes.get('/providers', AuthMiddleware, ProviderController.index)
-productRoutes.post('/providers', AuthMiddleware, ProviderController.store)
+productRoutes.get('/user/providers', AuthMiddleware, UserProviderController.index)
+productRoutes.post('/user/providers', AuthMiddleware, UserProviderController.store)
 
 export default productRoutes;
